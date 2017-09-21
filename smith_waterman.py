@@ -28,7 +28,7 @@ def calc_v(i, j):
     # Determine if we have matching letters
     if s_list[i] == t_list[j]:
         have_match = True
-        #print("Have match {0} and {1}".format(s_list[i], t_list[j]))
+        # print("Have match {0} and {1}".format(s_list[i], t_list[j]))
 
     for k in range(len(coord_list)):
         if have_match is True and k == 0:
@@ -49,8 +49,37 @@ def calc_v(i, j):
 
 
 # Returns the correct alignment
-def create_alignment():
-    pass
+def create_alignment(s, t):
+    # Stacks to hold the characters for the alignment
+    alignment_s = ''
+    alignment_t = ''
+    s_prime = []
+    t_prime = []
+    score = global_max[0]
+    i = global_max[1][0]
+    j = global_max[1][1]
+    while (score != 0):
+        direction = score_array[i, j][1]
+        if direction == 1:
+            s_prime.append(s[i])
+            t_prime.append(t[j])
+            i = i - 1
+            j = j - 1
+        elif direction == 2:
+            s_prime.append("_")
+            t_prime.append(t[j])
+            j = j - 1
+        else:
+            t_prime.append("_")
+            s_prime.append(s[i])
+            i = i - 1
+        score = score_array[i][j][0]
+    for x in range(len(s_prime)):
+        alignment_s += s_prime.pop()
+    for y in range(len(t_prime)):
+        alignment_t += t_prime.pop()
+    print(alignment_s + "\n")
+    print(alignment_t + "\n")
 
 
 def main():
@@ -72,13 +101,12 @@ def main():
 
     for i in range(1, len(score_array)):
         for j in range(1, len(score_array[i])):
-            #print("S: {0}, T: {1}".format(s_list[i], t_list[j]))
+            # print("S: {0}, T: {1}".format(s_list[i], t_list[j]))
             calc_v(i, j)
             print(score_array)
 
-
-
     print_scores()
+
 
 def print_scores():
     global score_array
@@ -87,5 +115,6 @@ def print_scores():
         print()
         for j in range(len(score_array[i])):
             print(score_array[i][j][0], end=" ")
+
 
 main()
