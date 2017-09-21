@@ -20,7 +20,7 @@ def calc_v(i, j):
     global s_list
     global t_list
 
-    local_max = 0
+    local_max = -2
     local_max_dir = None
     have_match = False
     coord_list = [(i - 1, j - 1), (i, j - 1), (i - 1, j)]
@@ -39,6 +39,10 @@ def calc_v(i, j):
         if score > local_max:
             local_max = score
             local_max_dir = k + 1
+
+    if local_max < 0:
+        local_max = 0
+        local_max_dir = None
 
     score_array[i][j][0] = local_max
     score_array[i][j][1] = local_max_dir
@@ -97,15 +101,17 @@ def main():
     s_list.insert(0, '_')
     t_list.insert(0, '_')
 
-    score_array = [[[0, None]] * len(t_list)] * len(s_list)
+    score_array = [[[0, None] for i in range(len(t_list))] for j in range(len(s_list))]
 
     for i in range(1, len(score_array)):
         for j in range(1, len(score_array[i])):
             # print("S: {0}, T: {1}".format(s_list[i], t_list[j]))
             calc_v(i, j)
-            print(score_array)
+
+    #print(score_array)
 
     print_scores()
+    #create_alignment(s, t)
 
 
 def print_scores():
