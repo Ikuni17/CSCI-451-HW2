@@ -17,6 +17,8 @@ def calc_v(i,j):
 # Returns the correct alignment
 def create_alignment(s, t):
     #Stacks to hold the characters for the alignment
+    alignment_s = ''
+    alignment_t = ''
     s_prime = []
     t_prime = []
     score = global_max [0]
@@ -38,7 +40,12 @@ def create_alignment(s, t):
             s_prime.append(s[i])
             i = i - 1
         score = score_array[i][j][0]
-
+    for x in range(len(s_prime)):
+        alignment_s += s_prime.pop()
+    for y in range(len(t_prime)):
+        alignment_t += t_prime.pop()
+    print(alignment_s + "\n")
+    print(alignment_t + "\n")
 
 def main():
     global global_max
