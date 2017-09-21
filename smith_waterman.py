@@ -47,7 +47,7 @@ def calc_v(i, j):
     score_array[i][j][0] = local_max
     score_array[i][j][1] = local_max_dir
 
-    if local_max > global_max[0]:
+    if local_max >= global_max[0]:
         global_max[0] = local_max
         global_max[1] = (i, j)
 
@@ -63,7 +63,7 @@ def create_alignment(s, t):
     i = global_max[1][0]
     j = global_max[1][1]
     while (score != 0):
-        direction = score_array[i, j][1]
+        direction = score_array[i][j][1]
         if direction == 1:
             s_prime.append(s[i])
             t_prime.append(t[j])
@@ -82,8 +82,8 @@ def create_alignment(s, t):
         alignment_s += s_prime.pop()
     for y in range(len(t_prime)):
         alignment_t += t_prime.pop()
-    print(alignment_s + "\n")
-    print(alignment_t + "\n")
+    print("\n" + alignment_s)
+    print(alignment_t)
 
 
 def main():
@@ -108,10 +108,10 @@ def main():
             # print("S: {0}, T: {1}".format(s_list[i], t_list[j]))
             calc_v(i, j)
 
-    #print(score_array)
+    # print(score_array)
 
     print_scores()
-    #create_alignment(s, t)
+    create_alignment(s_list, t_list)
 
 
 def print_scores():
