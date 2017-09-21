@@ -6,6 +6,7 @@ September 21, 2017
 '''
 
 # Global variables
+#Directions: 1 is left, 2 diagonal, 3 is up
 global_max = [0, (0,0)]
 score_array = [[]]
 
