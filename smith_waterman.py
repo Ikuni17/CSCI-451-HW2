@@ -6,7 +6,7 @@ September 21, 2017
 '''
 
 # Global variables
-#Directions: 1 is left, 2 diagonal, 3 is up
+#Directions: 1 is diagnoal, 2 left, 3 is up
 global_max = [0, (0,0)]
 score_array = [[]]
 
@@ -20,23 +20,24 @@ def create_alignment(s, t):
     s_prime = []
     t_prime = []
     score = global_max [0]
-    location = global_max[1]
+    i = global_max[1][0]
+    j = global_max[1][1]
     while(score != 0):
-        direction = score_array[location[0]][location[1]][1]
-        if direction == 2:
-            s_prime.append(s[location[0]])
-            t_prime.append(t[location[1]])
-            location[0] = location[0] - 1
-            location[1] = location[1] - 1
-        elif direction == 1:
+        direction = score_array[i , j][1]
+        if direction == 1:
+            s_prime.append(s[i])
+            t_prime.append(t[j])
+            i = i - 1
+            j = j - 1
+        elif direction == 2:
             s_prime.append("_")
-            t_prime.append(t[location[1]])
-            location[1] = location[1] - 1
+            t_prime.append(t[j])
+            j = j - 1
         else:
             t_prime.append("_")
-            s_prime.append(s[location[0]])
-            location[0] = location[0] - 1
-        score = score_array[location[0]][location[1]][0]
+            s_prime.append(s[i])
+            i = i - 1
+        score = score_array[i][j][0]
 
 
 def main():
