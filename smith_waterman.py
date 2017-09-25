@@ -62,50 +62,50 @@ def calc_v(i, j):
 
 # Returns the correct alignment
 def create_alignment(s, t):
-    #The finalized local alingment
+    # The finalized local alingment
     alignment_s = ''
     alignment_t = ''
     # Stacks to hold the characters for the alignment
     s_prime = []
     t_prime = []
-    #Initialized the local score to the max score
+    # Initialized the local score to the max score
     score = global_max[0]
-    #The starting position that coresponds to the maximum alingment score
+    # The starting position that coresponds to the maximum alingment score
     i = global_max[1][0]
     j = global_max[1][1]
-    #Will continue until it reaches a score of 0, indicating that the local allingment has been done
+    # Will continue until it reaches a score of 0, indicating that the local allingment has been done
     while (score != 0):
         direction = score_array[i][j][1]
-        #Diagnoal direction, copying the char at the current index into the alignment
+        # Diagnoal direction, copying the char at the current index into the alignment
         if direction == 1:
             s_prime.append(s[i])
             t_prime.append(t[j])
-            #Moves the local position "diagonaly"
+            # Moves the local position "diagonaly"
             i = i - 1
             j = j - 1
-        #Direction to the left, add a space into the S string alingment
-        #Copy the current char in T, to the t aligments
+        # Direction to the left, add a space into the S string alingment
+        # Copy the current char in T, to the t aligments
         elif direction == 2:
             s_prime.append("_")
             t_prime.append(t[j])
-            #i'th index does not change, move "left" for the jth index
+            # i'th index does not change, move "left" for the jth index
             j = j - 1
-        #Direction is up, add a space into the T alingment
-        #Copy the char at the curent index in S into the s aligment
+        # Direction is up, add a space into the T alingment
+        # Copy the char at the curent index in S into the s aligment
         else:
             t_prime.append("_")
             s_prime.append(s[i])
-            #j'th index does not change, move "up" for the ith index
+            # j'th index does not change, move "up" for the ith index
             i = i - 1
         score = score_array[i][j][0]
-    #Creates the alignment from the stack
+    # Creates the alignment from the stack
     for x in range(len(s_prime)):
         alignment_s += s_prime.pop()
     for y in range(len(t_prime)):
         alignment_t += t_prime.pop()
-    #Prints the alignment
-    print("\n" + alignment_s)
-    print(alignment_t)
+    # Prints the alignment
+    print("\t" + alignment_s)
+    print("\t" + alignment_t)
 
 
 def main():
@@ -133,6 +133,8 @@ def main():
             calc_v(i, j)
 
     print_scores()
+    print("\nAlignment score: {0}".format(global_max[0]))
+    print("Alignment of strings:")
     create_alignment(s_list, t_list)
 
 
@@ -141,7 +143,8 @@ def print_scores():
     global score_array
 
     for i in range(len(score_array)):
-        print()
+        if i != 0:
+            print()
         for j in range(len(score_array[i])):
             print(score_array[i][j][0], end=" ")
 
