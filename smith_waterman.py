@@ -5,6 +5,8 @@ CSCI 451/551
 September 21, 2017
 '''
 
+# Interpreter: Python 3.5.1
+
 # Global variables
 # Directions: 1 is diagonal, 2 is left, 3 is up
 # @param global_max: the score and index for the current highest scoring sub string
