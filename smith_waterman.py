@@ -144,6 +144,7 @@ def main():
 def print_scores():
     global score_array
 
+    print("Matrix produced:")
     for i in range(len(score_array)):
         if i != 0:
             print()
