@@ -12,6 +12,8 @@ September 21, 2017
 # @param global_max: the score and index for the current highest scoring sub string
 # @param score_array: 3D array which has a score and the direction from which thatscore was calculated in the final list
 # @param x_list: the input strings converted to lists so the letters can indexed easier
+from random import choice
+
 global_max = [0, (0, 0)]
 score_array = [[[]]]
 s_list = []
@@ -117,9 +119,14 @@ def main():
     global t_list
 
     # Input strings, examples used in the book
-    s = "acaatcg"
-    t = "ctcatgc"
+    #s = "acaatcg"
+    #t = "ctcatgc"
+    # Randomly generated strings
+    length = 12
+    s = ''.join(choice('actg') for i in range(length))
+    t = ''.join(choice('actg') for i in range(length))
 
+    # Convert the strings to list for easier indexing
     s_list = list(s)
     t_list = list(t)
 
@@ -134,8 +141,9 @@ def main():
         for j in range(1, len(score_array[i])):
             calc_v(i, j)
 
+    print("Input Strings:\ns = {0}\nt = {1}\n".format(s,t))
     print_scores()
-    print("\nAlignment score: {0}".format(global_max[0]))
+    print("\n\nAlignment score: {0}".format(global_max[0]))
     print("Alignment of strings:")
     create_alignment(s_list, t_list)
 
